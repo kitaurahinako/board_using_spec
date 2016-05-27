@@ -1,5 +1,19 @@
-<h1>New My Thread</h1>
-
-<%= render 'form' %>
-
+<h1>スレッド作成</h1>
+<%= form_for @my_thread do |f| %>
+<p>
+  <%= f.label :title %><br>
+  <%=f.text_field :title %>
+</p>
+<p>
+  <%= f.label :overview %><br>
+  <%=f.text_field :overview %>
+</p>
+<% if @my_thread.errors.any? %>
+<%= @my_thread.errors.messages[:title][0] %>
+<%= @my_thread.errors.messages[:overview][0] %>
+<% end %>
+<p>
+  <%= f.submit %>
+</p>
+<% end %>
 <%= link_to 'Back', my_threads_path %>

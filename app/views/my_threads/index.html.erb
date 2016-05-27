@@ -1,29 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing My Threads</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Overview</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<h1>スレッド一覧</h1>
+  <ul>
     <% @my_threads.each do |my_thread| %>
-      <tr>
-        <td><%= my_thread.name %></td>
-        <td><%= my_thread.overview %></td>
-        <td><%= link_to 'Show', my_thread %></td>
-        <td><%= link_to 'Edit', edit_my_thread_path(my_thread) %></td>
-        <td><%= link_to 'Destroy', my_thread, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <li>
+      <%= link_to my_thread.title, my_thread_path(my_thread.id) %>
+      <% if current_user.id == my_thread.user_id %>
+      <%= link_to "編集", edit_my_thread_path(my_thread.id) %>
+      <%= link_to "削除", my_thread_path(my_thread.id), method: :delete, data: {confirm: "Are you sure?"} %>
+      <% end %>
+
+
+</li>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New My thread', new_my_thread_path %>
+  </ul>
+  <p><%= link_to "スレッド作成", new_my_thread_path %>

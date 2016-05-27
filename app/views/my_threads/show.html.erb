@@ -1,43 +1,19 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @my_thread.name %>
-</p>
-
-<p>
-  <strong>Overview:</strong>
-  <%= @my_thread.overview %>
-</p>
-
-<h1>Listing Comments</h1>
-
+<h1><%= @my_thread.title %></h1>
+<h2><%= @my_thread.overview %></h2>
 <table>
-  <thead>
+  <% @my_comments.each do |my_comment| %>
     <tr>
-      <th>Content</th>
-      <th colspan="3"></th>
+      <td><%= my_comment.content %></td>
+      <% if current_user.id == my_comment.user_id %>
+      <td><%= link_to '編集', edit_my_comment_path(my_comment) %></td>
+      <td><%= link_to '削除', my_comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
     </tr>
-  </thead>
-
-  <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.content %></td>
-      <!--  <td><%= link_to 'Show', comment %></td> -->
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+  <% end %>
 </table>
-
+<%= render partial: "my_comments/form", locals: {my_thread: @my_thread, my_comment: @my_comment}%>
 <br>
-<%= render partial: "comments/form", locals: {my_thread: @my_thread, comment: @comment}%>
-
-
-
-<!-- <%= link_to 'New Comment', new_my_thread_comment_path(:my_thread_id) %> -->
-<br>
+<% if current_user.id == @my_thread.user_id %>
 <%= link_to 'Edit', edit_my_thread_path(@my_thread) %> |
+<% end %>
 <%= link_to 'Back', my_threads_path %>

@@ -1,25 +1,23 @@
-<%= form_for(@my_thread) do |f| %>
-  <% if @my_thread.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@my_thread.errors.count, "error") %> prohibited this my_thread from being saved:</h2>
+<% if current_user.id == @my_thread.user_id %>
 
-      <ul>
-      <% @my_thread.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+  <%= form_for @my_thread do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%=f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :overview %><br>
+    <%=f.text_field :overview %>
+  </p>
+  <% if @my_thread.errors.any? %>
+  <%= @my_thread.errors.messages[:title][0] %>
+  <%= @my_thread.errors.messages[:overview][0] %>
+  <% end %>
+  <p>
+    <%= f.submit %>
+  </p>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :overview %><br>
-    <%= f.text_field :overview %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<% else %>
+  <p>編集できません</p>
 <% end %>

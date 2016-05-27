@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :my_threads, shallow: true do
-    resources :comments
+    resources :my_comments
   end
-# The priority is based upon order of creation: first created -> highest priority.
+
+  root 'my_threads#index'
+  # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"

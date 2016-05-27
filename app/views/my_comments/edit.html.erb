@@ -1,0 +1,17 @@
+<h1>コメント編集</h1>
+<% if @my_comment.user_id == current_user.id %>
+  <%= form_for @my_comment do |f| %>
+  <p>
+    <%= f.label :content %><br>
+    <%=f.text_area :content %>
+  </p>
+  <% if @my_comment.errors.any? %>
+  <%= @my_comment.errors.messages[:content][0] %>
+  <% end %>
+  <p>
+    <%= f.submit %>
+  </p>
+  <% end %>
+<% else %>
+  <p>編集できません</p>
+<% end %>

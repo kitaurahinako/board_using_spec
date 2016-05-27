@@ -1,6 +1,24 @@
-<h1>Editing My Thread</h1>
+<h1>スレッド名編集</h1>
+<% if current_user.id == @my_thread.user_id %>
 
-<%= render 'form' %>
+  <%= form_for @my_thread do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%=f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :overview %><br>
+    <%=f.text_field :overview %>
+  </p>
+  <% if @my_thread.errors.any? %>
+  <%= @my_thread.errors.messages[:title][0] %>
+  <%= @my_thread.errors.messages[:overview][0] %>
+  <% end %>
+  <p>
+    <%= f.submit %>
+  </p>
+  <% end %>
 
-<%= link_to 'Show', @my_thread %> |
-<%= link_to 'Back', my_threads_path %>
+<% else %>
+  <p>編集できません</p>
+<% end %>

@@ -1,3 +1,5 @@
 class MyThread < ActiveRecord::Base
-  has_many :comments
+  validates :title, presence: { message: "入力してください"}
+  validates :overview, presence: { message: "入力してください"}
+  has_many :my_comments
 end
