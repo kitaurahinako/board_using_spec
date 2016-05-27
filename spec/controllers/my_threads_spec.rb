@@ -147,11 +147,8 @@ describe MyThreadsController do
         expect(response).to redirect_to my_threads_path
       end
     end
-  end
+  end #full access
 
-#full access
-  #=end
-  #=begin
 
   describe "guest access" do
 
@@ -216,8 +213,5 @@ describe MyThreadsController do
         expect(response).to redirect_to user_session_path
       end
     end
-
   end #guest access
-#=end
-
 end

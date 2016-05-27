@@ -52,7 +52,6 @@ describe MyCommentsController do
           }.not_to change(MyComment, :count)
         end
       end
-
     end #describe(index)
 
     describe 'GET #edit' do
@@ -106,9 +105,7 @@ describe MyCommentsController do
         delete :destroy, id:my_comment
         expect(response).to redirect_to my_thread_path(my_comment.my_thread_id)
       end
-
     end #delete
-
   end #full access
 
 
@@ -171,7 +168,5 @@ describe MyCommentsController do
         expect(response).to redirect_to user_session_path
       end
     end
-
   end #guest access
-
 end
