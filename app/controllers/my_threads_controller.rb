@@ -16,6 +16,9 @@ class MyThreadsController < ApplicationController
   end
 
   def edit
+    if @my_thread.user_id == current_user.id
+       @my_thread.destroy
+    end
   end
 
   def create
@@ -38,7 +41,7 @@ class MyThreadsController < ApplicationController
 
   def destroy
     if @my_thread.user_id == current_user.id
-      @my_thread.destroy
+       @my_thread.destroy
     end
     redirect_to my_threads_path
   end

@@ -9,7 +9,7 @@ class MyCommentsController < ApplicationController
       if @my_comment.save
         redirect_to my_thread_path(@my_comment.my_thread_id)
       else
-        render 'new'
+        redirect_to my_thread_path(@my_comment.my_thread_id)
       end
   end
 
